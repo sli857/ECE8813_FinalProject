@@ -2,10 +2,12 @@ import requests
 import json
 
 def ask_agent(prompt: str)-> str:
+    with open("apikey", "r") as f:
+        API_KEY = f.read().strip()
     response = requests.post(
     url="https://openrouter.ai/api/v1/chat/completions",
     headers={
-        "Authorization": "Bearer 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",
+        "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
         # "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
         # "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
@@ -124,3 +126,4 @@ wellsfargo.com
     """
     
     res = ask_agent(prompt)
+    print(res)
